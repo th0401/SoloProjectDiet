@@ -36,4 +36,10 @@ public class UserInfoServiceImpl implements UserInfoService{
 		userInfoDAO.updateProfile(vo);
 		
 	}
+
+	@Override
+	public boolean checkID(String id) {
+		
+		return userInfoDAO.checkID(id);
+	}
 }

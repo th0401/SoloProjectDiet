@@ -6,4 +6,5 @@ public interface UserInfoService {
 	void updateUser(UserInfoVO vo);
 	void deleteUser(UserInfoVO vo);
 	void updateProfile(UserInfoVO vo);
+	boolean checkID(String id);
 }

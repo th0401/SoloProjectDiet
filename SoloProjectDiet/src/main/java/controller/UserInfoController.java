@@ -373,7 +373,35 @@ public class UserInfoController {
 		}
 		
 		return "newsPage.jsp";
-		
-		
+	
 	}
+	
+	@RequestMapping("/checkID.do")
+	public String checkID(HttpServletResponse response,HttpServletRequest request) {
+	
+		response.setContentType("text/html; charset=UTF-8"); 
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			//System.out.println(userInfoService.checkID(request.getParameter("id"))==true);
+			if(userInfoService.checkID(request.getParameter("id"))){
+				out.println("true"); // out.println으로 ajax data에게 데이터가 넘어가게됨
+									  // true로 데이터를 보내면 데이터가 있다는 의미. 즉 존재하는 아이디라는 뜻
+			}
+			 
+			else { 
+				out.println("false"); // false로 데이터를 보내면 데이터가 없다는 의미. 즉 사용 가능한 아이디라는 뜻 
+			}
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}		
+		
+		
+		// 이동경로 없음
+
+		return null;
+	}
+	
+	
 }

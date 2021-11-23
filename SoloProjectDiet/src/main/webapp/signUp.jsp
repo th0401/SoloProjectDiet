@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
-  <!-- Required meta tags -->
+
+ <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title><spring:message code="message.signUp.pagetitle" /></title>
@@ -20,6 +21,13 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
+  
+  <style type="text/css">
+  .checkIdBtn{
+  float:right;
+  margin-bottom:15px;
+  }
+  </style>
 </head>
 
 <body>
@@ -39,15 +47,20 @@
               <form class="pt-3" action="signUp.do" method="post" >
               
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="id" placeholder="<spring:message code="message.signUp.id" />" required>
-                  <!-- <br>
-                  <button type="button" style="background-color: #f7e0f9; border-color: #aa41b3;" class="form-control" onclick="emptyID('signUp')" >id중복체크</button> -->
+                  <input type="text" class="form-control form-control-lg" name="id" id="sid" placeholder="<spring:message code="message.signUp.id" />" required>
+                   <br>
+                   <div class="checkIdBtn">
+                  <button type="button" class="btn btn-outline-info btn-icon-text" onclick="emptyID()"><i class="mdi mdi-upload btn-icon-prepend"></i>id중복체크</button>
+                  </div>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="pw" placeholder="<spring:message code="message.signUp.pw" />" required>
+                  <input type="password" class="form-control form-control-lg"  name="pw" placeholder="<spring:message code="message.signUp.pw" />" required>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="name" placeholder="Username" required>
+                  <input type="password" class="form-control form-control-lg"  name="pwCheck" placeholder="<spring:message code="message.signUp.pwCheck" />" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control form-control-lg" name="name" placeholder="Username" required>
                 </div>
                 
                         <div class="form-group row">
@@ -55,7 +68,7 @@
                           <div class="col-sm-4">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="gender" id="membershipRadios1" value="man" checked>
+                                <input type="radio" class="form-check-input" name="gender" value="man" checked>
                                 <spring:message code="message.signUp.man" />
                               </label>
                             </div>
@@ -63,7 +76,7 @@
                           <div class="col-sm-5">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="gender" id="membershipRadios2" value="woman">
+                                <input type="radio" class="form-check-input" name="gender" value="woman">
                                 <spring:message code="message.signUp.woman" />
                               </label>
                             </div>
@@ -97,6 +110,8 @@
   <script src="js/off-canvas.js"></script>
   <script src="js/hoverable-collapse.js"></script>
   <script src="js/template.js"></script>
+  <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/Common.js"></script>
   <!-- endinject -->
 </body>
 

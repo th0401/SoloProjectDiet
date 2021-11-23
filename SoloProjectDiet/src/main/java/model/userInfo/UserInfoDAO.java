@@ -15,10 +15,12 @@ public class UserInfoDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	private final String loginSQL="select * from Userinfo where id=? and pw=?";
-	private final String insertSQL="insert into Userinfo (id,pw,name,gender) values(?,?,?,?)";
-	private final String updateSQL="update Userinfo set pw=?,name=? ,gender=? where id=?";
-	private final String deleteSQL="delete Userinfo where id=?";
+	private final String loginSQL="SELECT * FROM USERINFO WHERE ID=? AND PW=?";
+	private final String insertSQL="INSERT INTO USERINFO (ID,PW,NAME,GENDER) VALUES(?,?,?,?)";
+	private final String updateSQL="UPDATE USERINFO SET PW=?,NAME=? ,GENDER=? WHERE ID=?";
+	private final String deleteSQL="DELETE USERINFO WHERE ID=?";
+	private final String sql_CHECKID = "SELECT * FROM USERINFO WHERE ID=?";
+	
 	
 	public boolean insertUser(UserInfoVO vo) {
 		System.out.println("dao·Î insertUserinfo");
@@ -108,4 +110,6 @@ public class UserInfoDAO {
 		
 		return data;
 	}
+	
+	
 }
