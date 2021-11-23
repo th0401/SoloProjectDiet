@@ -34,12 +34,11 @@
               <h4>Error!!!</h4>
               <br><br><br>
               <h6 class="font-weight-light">${exception}</h6>
-              <br><br>
-               <div class="form-group">                 
+              
+                <div class="form-group">                 
                 <div class="my-3">
-                  <a class="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn" href="main.do">메인으로 돌아가기</a>
-                </div>
-               </div>            
+                  <a class="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn" href="index.html">메인으로 돌아가기</a>
+                </div>           
             </div>
           </div>
           <div class="col-lg-6 login-half-bg d-flex flex-row">
