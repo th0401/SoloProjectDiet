@@ -187,12 +187,14 @@
 
                     </p>
                   </div>
-                  <button type="button" class="btn btn-info" id="inBodyBtn" onclick="insertBody()">새로 등록하기!</button>
+                  <div id="insertMainBodyBtn">
+                  <button type="button" class="btn btn-info" id="inBodyBtn" onclick="insertUpdateBtn('insertMainBodyBtn','insertMainBodyForm')">새로 등록하기!</button>
+                  </div>
                 </div>
               </div>              
             </div> 
             
-            <div style="display: none;" id="inBodyDiv">
+            <div class="displNone" id="insertMainBodyForm">
             <form class="pt-3" method="post" action="insertBody.do">
           	<input type="hidden" name="b_user" value="${uVO.id}">
                 <div class="form-group">
@@ -206,7 +208,7 @@
                       <i class="mdi mdi-account"></i>                      
                       등록하기
                     </button>
-                <button type="button" class="btn btn-info btn-lg btn-block" onclick="insertBodyCancle()">
+                <button type="button" class="btn btn-info btn-lg btn-block" onclick="insertUpdateCancleBtn('insertMainBodyBtn','insertMainBodyForm')">
                       <i class="mdi mdi-account"></i>                      
                       취소하기
                     </button>
@@ -392,7 +394,7 @@
                    <div id="updateDietMainForm" class="displNone">
                    <form method="post">
                    <input type="hidden" name="dnum" id="ufdn" value="${lastDietVO.dnum}">
-                   <table class="table table-bordered" style="text-align: center;" id="recentMainDietForm">
+                   <table class="table table-bordered" style="text-align: center;">
                    
                       <thead>                     
                         <tr>
@@ -457,7 +459,7 @@
                     </table>
                     </form>
                     <br>
-                    <button type="button" class="dietInsBtn btn btn-info marginLeft" onclick="insertUpdateCancleBtn('recentMainDietForm','insertMainDietForm')" id="insertMainDietBtn" style="width: 170px;">취소하기</button>
+                    <button type="button" class="dietInsBtn btn btn-info marginLeft" onclick="insertUpdateCancleBtn('recentMainDietForm','updateDietMainForm')" id="insertMainDietBtn" style="width: 170px;">취소하기</button>
                    <button type="button" class="dietInsBtn btn btn-info" onclick="dietEditFinish()">수정하기</button>
                    </div>
                    
@@ -525,7 +527,7 @@
                       </tbody>                     
                     </table>
                      <br>
-                     <button type="button" class="dietInsBtn btn btn-info marginLeft"onclick="insertMainDietCancle()">취소하기</button> 
+                     <button type="button" class="dietInsBtn btn btn-info marginLeft"onclick="insertUpdateCancleBtn('recentMainDietForm','insertMainDietForm')">취소하기</button> 
                      <button type="submit" class="dietInsBtn btn btn-info">등록하기</button>
                                                 
                     </form>  

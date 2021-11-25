@@ -12,22 +12,22 @@ function checkAlert(uri, text) {
 }   
 //=================================================== main.jsp===================================================
 
+function insertUpdateBtn(id1,id2){ // 등록버튼 클릭시 등록폼이 보이게하는 기능, 모든 페이지 통합
+	$('#'+id1).addClass('displNone');
+	$('#'+id2).removeClass('displNone');
+}
+
+function insertUpdateCancleBtn(id1,id2){ // 취소버튼 클릭시 등록폼이 사라지게하는 기능, 모든 페이지 통합
+	$('#'+id1).removeClass('displNone');
+	$('#'+id2).addClass('displNone');
+}
+
+/* 기존에 해왔던 js코드 => 기능을 통합한 코드로 개발하여 필요없음
 function insertBody(){ // 등록버튼 클릭시 등록폼이 보이게하는 기능
 
 	$('#inBodyDiv').css('display','');
 	$('#inBodyBtn').css('visibility','hidden');
 }	 
-
-
-function insertUpdateBtn(id1,id2){ // 등록버튼 클릭시 등록폼이 보이게하는 기능
-	$('#'+id1).addClass('displNone');
-	$('#'+id2).removeClass('displNone');
-}
-
-function insertUpdateCancleBtn(id1,id2){ // 취소버튼 클릭시 등록폼이 사라지게하는 기능
-	$('#'+id1).removeClass('displNone');
-	$('#'+id2).addClass('displNone');
-}
 
 function insertBodyCancle(){ 
 
@@ -46,7 +46,7 @@ function updateMainDietCancle(){
 	$('#recentMainDietForm').removeClass('displNone');
 	
 }
-
+*/
 function dietEditFinish(){ 
 	
 	var dnum = $("#ufdn").val();

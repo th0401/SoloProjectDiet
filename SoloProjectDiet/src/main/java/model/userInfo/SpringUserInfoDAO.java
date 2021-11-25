@@ -91,7 +91,8 @@ public class SpringUserInfoDAO {
 		Object[] args= {id};
 		
 		try {
-			jdbcTemplate.queryForObject(sql_CHECKID,args,new UserInfoRowMapper()); 
+			jdbcTemplate.queryForObject(sql_CHECKID,args,new UserInfoRowMapper());
+			
 			exist = true;   // 정보가 null이 아니면 id가 존재하기에 true
 		 }
 		 catch(DataAccessException e){	// 데이터가 없어 오류가 발생할 경우 처리하기 위한 작업 이걸 안하면 메서드 작동이 중지되어 값에 혼란이 옴.

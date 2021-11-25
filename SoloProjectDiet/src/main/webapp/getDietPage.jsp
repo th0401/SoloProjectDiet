@@ -95,7 +95,7 @@
                   </p>
                   <div class="table-responsive pt-3">
             
-                   <div id="recentMainDietForm">                  
+                   <div id="recentDietForm">                  
                     <table class="table table-bordered" style="text-align: center;">
                       <thead>                     
                         <tr>
@@ -165,12 +165,12 @@
                     </table>
                     <br>
                    <button type="button" class="dietInsBtn btn btn-info marginLeft" onclick="checkAlert('deleteDiet.do?dnum=${dietData.dnum}', '식단정보를 삭제하시겠어요?')" id="insertMainDietBtn" style="width: 170px;">삭제하기</button>
-                   <button type="button" class="dietInsBtn btn btn-info" onclick="insertMainDiet()" id="insertMainDietBtn" style="width: 170px;">정보수정</button>
+                   <button type="button" class="dietInsBtn btn btn-info" onclick="insertUpdateBtn('recentDietForm','updatetDietForm')"  style="width: 170px;">정보수정</button>
                    
                     </div>
                     
                     
-                    <form action="updateDiet.do" method="post" id="insertMainDietForm" class="displNone">
+                    <form action="updateDiet.do" method="post" id="updatetDietForm" class="displNone">
                     <input type="hidden" name="dnum" value="${dietData.dnum}">                    
                     
                     <table class="table table-bordered" style="text-align: center;">
@@ -234,7 +234,7 @@
                       </tbody>                     
                     </table>
                      <br>
-                     <button type="button" class="dietInsBtn btn btn-info marginLeft" id="insertMainDietCancleBtn"onclick="insertMainDietCancle()">취소하기</button>
+                     <button type="button" class="dietInsBtn btn btn-info marginLeft" onclick="insertUpdateCancleBtn('recentDietForm','updatetDietForm')">취소하기</button>
                      <button type="submit" class="dietInsBtn btn btn-info">변경하기</button>                            
                     </form>  
                                        
