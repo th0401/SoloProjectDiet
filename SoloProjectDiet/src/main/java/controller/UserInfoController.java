@@ -48,10 +48,10 @@ public class UserInfoController {
 
 	private HttpSession session;
 	private String path = "C:\\LEE_0622\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\SoloProjectDiet\\images\\profile\\";
-	
-	
-	
-	
+
+
+
+
 	@RequestMapping("/main.do")
 	public String getAllList(@RequestParam(value="condition",defaultValue="title",required=false)String condition,@RequestParam(value="keyword",defaultValue="",required=false)String keyword,UserInfoVO vo,Model model,HttpServletRequest request,HttpServletResponse response) {
 
@@ -70,15 +70,15 @@ public class UserInfoController {
 			//System.out.println(bodyDatas);
 
 			JBodyDatas = new JSONArray();
-			
-			
+
+			// Date form 변경
 			SimpleDateFormat formatD = new SimpleDateFormat("yy년 MM월 dd일 E요일");
-			
+
 			if(bodyDatas.size() > 6) {
 				for(int i = 0; i<7; i++) {
 					// 제이슨데이터를 계속 만드는 이유는 제이슨 데이터를 갱신해서 이 데이터들을 arrJson에 넣기위함이다!
 					jsonBodyData = new JSONObject(); 			
-				
+
 					jsonBodyData.put("date", formatD.format(bodyDatas.get(6-i).getBdate()));
 					jsonBodyData.put("weight", bodyDatas.get(6-i).getWeight());
 					JBodyDatas.add(jsonBodyData);
@@ -89,14 +89,14 @@ public class UserInfoController {
 				for(int i = 0; i<bodyDatas.size(); i++) {
 					// 제이슨데이터를 계속 만드는 이유는 제이슨 데이터를 갱신해서 이 데이터들을 arrJson에 넣기위함이다!
 					jsonBodyData = new JSONObject(); 			
-				
+
 					jsonBodyData.put("date", formatD.format(bodyDatas.get((bodyDatas.size()-1)-i).getBdate()));
 					jsonBodyData.put("weight", bodyDatas.get((bodyDatas.size()-1)-i).getWeight());
 					JBodyDatas.add(jsonBodyData);
 					//System.out.println(JBodyDatas);
 				}
 			}// 데이터가 하나도없으면 그냥 만들지 않는다!	
-			
+
 			//System.out.println(jsonBodyData);
 
 			/*String host_url = "http://localhost:8088/app/main.do";
@@ -136,7 +136,7 @@ public class UserInfoController {
 				}
 
 			}*/
-			
+
 		}
 
 		BodyVO lastBodyVO = new BodyVO(); 
@@ -153,11 +153,11 @@ public class UserInfoController {
 
 		//request.setAttribute("datas", datas);
 
-		model.addAttribute("bodyDatas", bodyDatas);
-		model.addAttribute("dietDatas", dietDatas);
-		model.addAttribute("lastBodyVO", lastBodyVO);
-		model.addAttribute("lastDietVO", lastDietVO);
-		model.addAttribute("jbd",JBodyDatas);
+		model.addAttribute("bodyDatas", bodyDatas); // 데이터가 아예 없다면 뷰에서 등록폼을 보여주기 위해 보냄
+		model.addAttribute("dietDatas", dietDatas); // 데이터가 아예 없다면 뷰에서 등록폼을 보여주기 위해 보냄
+		model.addAttribute("lastBodyVO", lastBodyVO); // 최신 BodyData
+		model.addAttribute("lastDietVO", lastDietVO); // 최신 DietData
+		model.addAttribute("jbd",JBodyDatas); // chartData를 보내기 위함
 		return "main.jsp";
 	}
 
@@ -171,7 +171,6 @@ public class UserInfoController {
 		if(vo != null) {
 			datas = bodyService.selectAll(vo);
 		}
-
 
 		//System.out.println(datas);
 
@@ -190,7 +189,7 @@ public class UserInfoController {
 	}
 
 	@RequestMapping("/login.do")
-	public String login(HttpServletRequest request,UserInfoVO vo,HttpServletResponse response) {
+	public String login(UserInfoVO vo,HttpServletResponse response,HttpServletRequest request) {
 		//System.out.println("id: "+request.getParameter("id")+", pw: "+request.getParameter("pw"));
 		UserInfoVO data = userInfoService.login(vo);
 		PrintWriter out;
@@ -204,18 +203,17 @@ public class UserInfoController {
 		}
 		else {
 			//System.out.println(data);
-						
+
 			try {
 				response.setContentType("text/html; charset=UTF-8"); 
 				out = response.getWriter();
 				out.println("<script>alert('로그인에 실패하셨습니다. 아이디 혹은 비밀번호를 확인해주세요.');  history.go(-1); </script>");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 			return null; // 전송페이지가 없으므로, null처리
 
-			// DS -> HM -> C -> VR
 		}
 
 	}
@@ -226,6 +224,8 @@ public class UserInfoController {
 		return "redirect:main.do";
 
 	}
+
+	// 국제화를 위해 로그인 페이지.do를 활용해 jsp페이지로 보내는 역할의 메서드
 	@RequestMapping(value="/loginPage.do",method=RequestMethod.GET)
 	public String loginPage() {
 		return "login.jsp";	
@@ -235,7 +235,7 @@ public class UserInfoController {
 	@RequestMapping("/signUp.do")
 	public String signUp(UserInfoVO vo) {
 		//System.out.println("회원가입 왔음!!!");
-		
+
 		String defaultImgFile = "defaultimg.jpg";
 		vo.setPath("images\\profile\\"+defaultImgFile);
 
@@ -258,41 +258,36 @@ public class UserInfoController {
 		vo.setId(uVo.getId());
 		MultipartFile fileupload = vo.getFileUpload();
 		//System.out.println("프로필컨트롤러 파일업로드이름 : "+fileupload);
-		
-		 String fileName = fileupload.getOriginalFilename();
-         String filename2 = vo.getId()+fileName.substring(fileName.length()-4,fileName.length()); //확장자
-         //System.out.println("파일설정 "+filename2);
-         //System.out.println("파일이름 : "+fileName);
-		
-		
-		try {
-		fileupload.transferTo(new File(path+filename2));
-		 vo.setPath("images\\profile\\"+filename2);
 
-	} catch (IllegalStateException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-		
+		String fileName = fileupload.getOriginalFilename();
+		String filename2 = vo.getId()+fileName.substring(fileName.length()-4,fileName.length()); //확장자
+		//System.out.println("파일설정 "+filename2);
+		//System.out.println("파일이름 : "+fileName);
+
+		try {
+			fileupload.transferTo(new File(path+filename2));
+			vo.setPath("images\\profile\\"+filename2);
+
+		} catch (IllegalStateException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {	
+			e.printStackTrace();
+		}		
 		userInfoService.updateProfile(vo);
 		PrintWriter out;
 		uVo.setPath(vo.getPath());
-			try {
-				out = response.getWriter();
-				out.println("<script>opener.location.reload();</script>");
-				out.println("<script>window.close();</script>");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
+		try {
+			out = response.getWriter();
+			out.println("<script>opener.location.reload();</script>");
+			out.println("<script>window.close();</script>");
+		} catch (IOException e) {			
+			e.printStackTrace();
+		}		
 
 		return null;
-		
+
 	}
-	
+
 	@RequestMapping("/updateUser.do")
 	public String updateUserInfo(HttpSession session,HttpServletRequest request,UserInfoVO vo) {
 		System.out.println(vo);
@@ -303,8 +298,8 @@ public class UserInfoController {
 
 		return "redirect:myPage.do";
 	}
-	
-	
+
+
 	@RequestMapping("/deleteUser.do")
 	public String deleteUserInfo(HttpSession session,UserInfoVO vo) {
 		session.invalidate();
@@ -320,7 +315,7 @@ public class UserInfoController {
 		
 		String newsUrl = "https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%8B%9D%EC%8A%B5%EA%B4%80";
 		Connection conn = Jsoup.connect(newsUrl);
-		
+
 		Document document;
 		try {
 			document = conn.get();
@@ -332,53 +327,44 @@ public class UserInfoController {
 			//System.out.println(locationElements);
 			Elements textContents = document.getElementsByClass("dsc_wrap");
 			//System.out.println(textContents);
-			
+
 			List<String> newsImg = new ArrayList<String>();
 			List<String> title = new ArrayList<String>();
 			List<String> dNewsUrl = new ArrayList<String>();
 			List<String> content = new ArrayList<String>();
-			
-			
+
+
 			for(Element v:ImageElements) {
 				newsImg.add(v.select("img").attr("src"));
 			}
-			
+
 			for(Element v:contentElements) {
 				title.add(v.select("a").attr("title"));								
 			}
 			for(Element v:locationElements) {
-				
 				dNewsUrl.add(v.select("a").attr("href"));				
 			}
-		
+
 			for(Element v:textContents) {
 				content.add(v.text());
-								
 			}
 
-			List<String> datas = new ArrayList<String>();
-			for(int i = 0; i<8; i++) {
-				datas.add(newsImg.get(i));
-				
-			}
-		
 			model.addAttribute("title", title);
 			model.addAttribute("newsImg", newsImg);
 			model.addAttribute("dNewsUrl", dNewsUrl);
 			model.addAttribute("content", content);
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
+		} catch (IOException e) {			
 			e.printStackTrace();
 		}
-		
+
 		return "newsPage.jsp";
-	
+
 	}
-	
+
 	@RequestMapping("/checkID.do")
 	public String checkID(HttpServletResponse response,HttpServletRequest request) {
-	
+
 		response.setContentType("text/html; charset=UTF-8"); 
 		PrintWriter out;
 		try {
@@ -386,22 +372,22 @@ public class UserInfoController {
 			//System.out.println(userInfoService.checkID(request.getParameter("id"))==true);
 			if(userInfoService.checkID(request.getParameter("id"))){
 				out.println("true"); // out.println으로 ajax data에게 데이터가 넘어가게됨
-									  // true로 데이터를 보내면 데이터가 있다는 의미. 즉 존재하는 아이디라는 뜻
+				// true로 데이터를 보내면 데이터가 있다는 의미. 즉 존재하는 아이디라는 뜻
 			}
-			 
+
 			else { 
 				out.println("false"); // false로 데이터를 보내면 데이터가 없다는 의미. 즉 사용 가능한 아이디라는 뜻 
 			}
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}		
-		
-		
+
+
 		// 이동경로 없음
 
 		return null;
 	}
-	
-	
+
+
 }

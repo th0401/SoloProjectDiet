@@ -5,8 +5,8 @@ $(function() {
    */
   'use strict';
 // 차트 
-  var datedatas = [];
-  var weightdatas = [];
+  const datedatas = [];
+  const weightdatas = [];
     
   // 데이터분리 코드
   $.each(jbd, function(inx, obj) {

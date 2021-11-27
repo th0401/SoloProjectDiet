@@ -110,7 +110,8 @@
 				style="width:300px; height:300px; display:inline;">
 			 
 			
-			<h2 class="tm-pt-30 tm-color-primary tm-post-title" style="color: #f9938e;">${title[status.index]}</h2>
+			<h2 class="tm-pt-30 tm-color-primary tm-post-title" style="color: #f9938e;">
+			${title[status.index]}</h2>
 		</a>
 		<p class="tm-pt-30">
 			${content[status.index]}

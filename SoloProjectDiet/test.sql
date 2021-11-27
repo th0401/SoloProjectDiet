@@ -18,7 +18,7 @@ CREATE TABLE diet(
 	another varchar(1500),
 	anotherCalorie int default 0,
 	ddate date default sysdate,
-	d_user varchar(200),	
+	d_user varchar(300),	
 	foreign key (d_user) references userInfo(id) on delete cascade
 );
 
@@ -28,7 +28,7 @@ CREATE TABLE body(
 	bnum int primary key,	
 	weight number(5,2) default 0,
 	height number(5,2) default 0,
-	b_user varchar(30),
+	b_user varchar(300),
 	bdate date default sysdate,
 	foreign key (b_user) references userInfo(id) on delete cascade
 );

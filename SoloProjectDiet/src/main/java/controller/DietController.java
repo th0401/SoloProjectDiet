@@ -71,15 +71,14 @@ public class DietController {
 	
 	@RequestMapping("/updateDietMain.do")
 	public String updateDietMain(DietVO vo,HttpServletResponse response) {
-		System.out.println("updateDietMain 컨트롤러옴!");
-		
-		DietVO newData = new DietVO(); 
+		//System.out.println("updateDietMain 컨트롤러옴!");
+ 
+		// dayCalorie를 컨트롤러에서 직접 규현(아침+점심+저녁 칼로리)
 		vo.setDayCalorie(vo.getBreakfastCalorie()+vo.getLunchCalorie()+vo.getDinerCalorie()+vo.getAnotherCalorie());
 		
 		dietService.updateDiet(vo);
-		newData = dietService.selectOne(vo);
-		//System.out.println(vo);
-		
+		DietVO newData = dietService.selectOne(vo);
+		//System.out.println(vo);		
 		
 		Date ddate = newData.getDdate();
 		String breakfast = newData.getBreakfast();
@@ -93,8 +92,7 @@ public class DietController {
 		int dayCalorie = newData.getDayCalorie();
 		
 	   // System.out.println(ddate);
-		
-		
+				
 		String result = "[{\"ddate\":\"" + ddate+"\",\"breakfast\":\"" + breakfast + "\",\"lunch\":\""+lunch+"\",\"diner\":\""+diner+"\",\"another\":\""+another+"\",\"breakfastCalorie\":\""+breakfastCalorie+"\",\"lunchCalorie\":\""+lunchCalorie+"\",\"dinerCalorie\":\""+dinerCalorie+"\",\"anotherCalorie\":\""+anotherCalorie+"\",\"dayCalorie\":\""+dayCalorie+"\"}]";
 		//System.out.println("result는 : "+result);
 		
@@ -104,7 +102,7 @@ public class DietController {
 			out = response.getWriter();
 			out.println(result);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("updateDiet중 에러발생");
 			e.printStackTrace();
 		}
 		

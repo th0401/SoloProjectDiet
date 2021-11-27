@@ -61,7 +61,7 @@
           ];
           //jbd[0],jbd[1],jbd[2]
           //console.log(jbd);
-          </script>
+   </script>
 </head>
 <body>
   <div class="container-scroller">

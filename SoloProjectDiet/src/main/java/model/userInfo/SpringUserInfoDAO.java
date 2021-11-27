@@ -84,8 +84,8 @@ public class SpringUserInfoDAO {
 	}
 	
 	public boolean checkID(String id) {
-		System.out.println("jdbcTemplate로 checkID");
-		System.out.println("이태호 : "+id);
+		//System.out.println("jdbcTemplate로 checkID");
+		//System.out.println("이태호 : "+id);
 		boolean exist=false; // id중복 확인
 		
 		Object[] args= {id};
@@ -95,10 +95,11 @@ public class SpringUserInfoDAO {
 			
 			exist = true;   // 정보가 null이 아니면 id가 존재하기에 true
 		 }
-		 catch(DataAccessException e){	// 데이터가 없어 오류가 발생할 경우 처리하기 위한 작업 이걸 안하면 메서드 작동이 중지되어 값에 혼란이 옴.
-			 							// 메서드 작동이 중지되는 근거로는 로깅이 작동되질 않음 만약 프로그램이 정상적으로 돌아간다면 로깅이 되어야하는데
-			 							// 도출된 값이 사용가능한 아이디 즉 등록되지 않은 id일 경우 null처리가 아닌 오류로 받아들이는것으로 보임.
-			 	
+		 catch(DataAccessException e){	
+			// 데이터가 없어 오류가 발생할 경우 처리하기 위한 작업 이걸 안하면 메서드 작동이 중지되어 값에 혼란이 옴.
+			// 메서드 작동이 중지되는 근거로는 로깅이 작동되질 않음 만약 프로그램이 정상적으로 돌아간다면 로깅이 되어야하는데
+			// 도출된 값이 사용가능한 아이디 즉 등록되지 않은 id일 경우 null처리가 아닌 오류로 받아들이는것으로 보임.	 
+			 
 			 return exist;  
 		 }		
 		
