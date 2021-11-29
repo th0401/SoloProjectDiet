@@ -55,7 +55,7 @@
               <form class="pt-3" action="signUp.do" method="post" name="join">
               
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" name="id" id="sid" placeholder="<spring:message code="message.signUp.id" />" required>
+                  <input type="text" class="form-control form-control-lg" name="id" id="sid" placeholder="<spring:message code="message.signUp.id" maxlength="15"/>" required>
                    <br>
                    <div class="checkIdBtn">
                   <button type="button" class="btn btn-outline-info btn-icon-text" id="confirm" onclick="emptyID()"><i class="mdi mdi-upload btn-icon-prepend"></i>id중복체크</button>
@@ -64,17 +64,17 @@
                 <br >
                 <span class="signupt" id="pwError"></span>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg check" id="pw" name="pw" placeholder="<spring:message code="message.signUp.pw" />" required>
+                  <input type="password" class="form-control form-control-lg check" id="pw" name="pw" maxlength="15" placeholder="<spring:message code="message.signUp.pw"/>" required>
                 </div>
                <br >
                 <span class="signupt" id="pwCheckError"></span>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg check" id="pwCheck" name="pwCheck" placeholder="<spring:message code="message.signUp.pwCheck" />" required>
+                  <input type="password" class="form-control form-control-lg check" id="pwCheck" name="pwCheck" maxlength="15" placeholder="<spring:message code="message.signUp.pwCheck" />" required>
                 </div>
                 <br >
                 <span class="signupt" id="nameError"></span>
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg check" id="name" name="name" placeholder="Username" required>
+                  <input type="text" class="form-control form-control-lg check" id="name" name="name" placeholder="Username" maxlength="6" required>
                 </div>
                 
                         <div class="form-group row">

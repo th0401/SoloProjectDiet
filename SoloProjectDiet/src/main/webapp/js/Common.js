@@ -24,6 +24,48 @@ function insertUpdateCancleBtn(id1,id2){ // 취소버튼 클릭시 등록폼이 
 	$('#'+id2).addClass('displNone');
 }
 
+//Byte 수 체크 제한
+function checkByte(obj, maxByte)
+{
+    var str = obj.value;
+    var str_len = str.length;
+
+
+    var rbyte = 0;
+    var rlen = 0;
+    var one_char = "";
+    var str2 = "";
+
+
+    for(var i=0; i<str_len; i++)
+    {
+        one_char = str.charAt(i);
+        if(escape(one_char).length > 4)
+        {
+            rbyte += 2;                                         //한글2Byte
+        }
+        else
+        {
+            rbyte++;                                            //영문 등 나머지 1Byte
+        }
+
+
+        if(rbyte <= maxByte)
+        {
+            rlen = i+1;                                          //return할 문자열 갯수
+        }
+     }
+
+
+     if(rbyte > maxByte)
+     {
+  // alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+  alert("글자수는 최대 " + maxByte + "byte를 초과할 수 없어요.!")
+  str2 = str.substr(0,rlen);                                  //문자열 자르기
+  obj.value = str2;
+  checkByte(obj, maxByte);
+     }
+}
 //=================================================== main.jsp===================================================
 
 
@@ -315,7 +357,7 @@ window.onload = function(){
 
 	// 오류ID 구간 전체 불러오기 -> innerReset함수 활용변수
 	var error = document.querySelectorAll('.signupt');
-	console.log(error[0]);
+	//console.log(error[0]);
 
 //-------------------------------------------------------------------------------------------
 	
@@ -371,7 +413,7 @@ window.onload = function(){
 	 }
 	 // 성명
 	 join.name.onkeyup = function(){
-		 innerReset(error);// 오류문구 초기화
+		 //innerReset(error);// 오류문구 초기화
 		 //var nameLimit = /^[ㄱ-ㅎㅏ-ㅣ가-힣0-9a-zA-Z_-]{1,10}$/;
 		 error[2].innerHTML = "";
          if (!nameLimit.test(input[2].value)) {
@@ -401,27 +443,6 @@ window.onload = function(){
            }
         }   
 		
-/*
-		// 오류확인
-		for(var i = 0; i < errorId.length; i++){
-			// [오류 체크] pwCheck
-			if(errorId[i] == 'pwCheckError'){
-				if(join.pw.value != join.pwCheck.value){ // pw와 같지않다면 에러문구 추가
-					document.getElementById(errorId[i]+"Error").innerHTML = "비밀번호가 일치하지 않습니다.";
-					input[i].focus(); // 포커스 이동
-					return false; // 종료 (포커스 이동유지를 위해 false 종료)
-				}
-			}// if문
-
-
-			// [오류 체크] 전체(id, pw, name)
-			if(!RegExp.test(input[i].value)){
-				document.getElementById(errorId[i]+"Error").innerHTML = errorStr[i];
-				input[i].focus(); // 포커스 이동
-				return false; // 종료 (포커스 이동유지를 위해 false 종료)
-			}	
-		}//for
-*/
 		 // pw
 		 if (!pwLimit.test(input[0].value)) {
             document.getElementById(errorId[0]+"Error").innerHTML = errorStr[0];
