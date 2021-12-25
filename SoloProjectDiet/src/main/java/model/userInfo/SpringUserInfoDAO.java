@@ -33,7 +33,7 @@ class UserInfoRowMapper implements RowMapper<UserInfoVO>{
 
 @Repository
 public class SpringUserInfoDAO {
-
+						// oracle , mysql °øÅë
 	private final String sql_LOGIN="SELECT * FROM USERINFO WHERE ID=? AND PW=?";
 	private final String sql_INSERT="INSERT INTO USERINFO (ID,PW,NAME,GENDER,PATH) VALUES(?,?,?,?,?)";
 	private final String sql_UPDATE="UPDATE USERINFO SET PW=?,NAME=?,GENDER=? WHERE ID=?";

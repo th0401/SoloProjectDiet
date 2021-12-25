@@ -9,9 +9,9 @@ import java.sql.SQLException;
 public class JDBC {
 	public static Connection getConnection() {
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","kim","1234");
-		} catch (Exception e) {
+			Class.forName("com.mysql.cj.jdbc.Driver"); // oracle.jdbc.driver.OracleDriver
+			return DriverManager.getConnection("jdbc:mysql://qkfzlfl000.cafe24.com","qkfzlfl000","dlxogh00"); // jdbc:oracle:thin:@localhost:1521:xe","kim","1234
+		} catch (Exception e) { 
 			e.printStackTrace();
 		}
 		return null;

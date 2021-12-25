@@ -33,9 +33,18 @@
       <property name="password" value="1234" />
    </bean>
 
-
-
-
+<!-- mysql용
+<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://qkfzlfl000.cafe24.com/qkfzlfl000" />
+			 jdbc:mysql://qkfzlfl000.cafe24.com/qkfzlfl000
+		<property name="username" value="qkfzlfl000" />
+		<property name="password" value="dlxogh00" />
+	</bean>
+  -->
 <!-- <bean class="com.lee.app.common.AfterAdvice" id="aAdvice"></bean>
 <bean class="com.lee.app.common.AroundAdvice" id="aroundAdvice"></bean>
  -->

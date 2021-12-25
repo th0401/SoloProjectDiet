@@ -55,7 +55,7 @@
               <form class="pt-3" action="signUp.do" method="post" name="join">
               
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" name="id" id="sid" placeholder="<spring:message code="message.signUp.id" maxlength="15"/>" required>
+                  <input type="text" class="form-control form-control-lg" name="id" id="sid" placeholder="<spring:message code="message.signUp.id"/>" maxlength="15" required>
                    <br>
                    <div class="checkIdBtn">
                   <button type="button" class="btn btn-outline-info btn-icon-text" id="confirm" onclick="emptyID()"><i class="mdi mdi-upload btn-icon-prepend"></i>id중복체크</button>

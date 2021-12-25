@@ -32,7 +32,12 @@ public class SpringBodyDAO {
 
 	private final String sql_SELECT_ALL = "SELECT * FROM BODY WHERE B_USER=? ORDER BY BNUM DESC";
 	private static String sql_SELECT_ONE = "SELECT * FROM BODY WHERE BNUM=?";
-	private final String sql_INSERT="INSERT INTO BODY (BNUM,HEIGHT,WEIGHT,BDATE,B_USER) VALUES((SELECT NVL(MAX(BNUM),0) + 1 FROM BODY),?,?,SYSDATE,?)";
+	
+	//mysql insert구문 
+	private final String sql_INSERT="INSERT INTO BODY (BNUM,HEIGHT,WEIGHT,BDATE,B_USER) VALUES(?,?,?,SYSDATE,?)";
+	
+	// oracle insert구문
+	//private final String sql_INSERT="INSERT INTO BODY (BNUM,HEIGHT,WEIGHT,BDATE,B_USER) VALUES((SELECT NVL(MAX(BNUM),0) + 1 FROM BODY),?,?,SYSDATE,?)";
 	private final String sql_UPDATE="UPDATE BODY SET HEIGHT=?,WEIGHT=? WHERE BNUM=?";
 	private final String sql_DELETE="DELETE BODY WHERE BNUM=?";
 	
