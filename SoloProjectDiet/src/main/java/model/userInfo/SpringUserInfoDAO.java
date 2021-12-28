@@ -34,12 +34,12 @@ class UserInfoRowMapper implements RowMapper<UserInfoVO>{
 @Repository
 public class SpringUserInfoDAO {
 						// oracle , mysql °øÅë
-	private final String sql_LOGIN="SELECT * FROM USERINFO WHERE ID=? AND PW=?";
-	private final String sql_INSERT="INSERT INTO USERINFO (ID,PW,NAME,GENDER,PATH) VALUES(?,?,?,?,?)";
-	private final String sql_UPDATE="UPDATE USERINFO SET PW=?,NAME=?,GENDER=? WHERE ID=?";
-	private final String sql_DELETE="DELETE USERINFO WHERE ID=?";
-	private final String sql_UPDATE_PROFILE="UPDATE USERINFO SET PATH=? WHERE ID=?";
-	private final String sql_CHECKID = "SELECT * FROM USERINFO WHERE ID=?";
+	private final String sql_LOGIN="SELECT * FROM userInfo WHERE ID=? AND PW=?";
+	private final String sql_INSERT="INSERT INTO userInfo (ID,PW,NAME,GENDER,PATH) VALUES(?,?,?,?,?)";
+	private final String sql_UPDATE="UPDATE userInfo SET PW=?,NAME=?,GENDER=? WHERE ID=?";
+	private final String sql_DELETE="DELETE FROM userInfo WHERE ID=?";
+	private final String sql_UPDATE_PROFILE="UPDATE userInfo SET PATH=? WHERE ID=?";
+	private final String sql_CHECKID = "SELECT * FROM userInfo WHERE ID=?";
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
