@@ -47,10 +47,13 @@ public class UserInfoController {
 	private DietService dietService;
 
 	private HttpSession session;
-	private String path = "C:\\LEE_0622\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\SoloProjectDiet\\images\\profile\\";
+//	local용
+//	private String path = "C:\\LEE_0622\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\SoloProjectDiet\\images\\profile\\";
 
+//	FileZila용
+	private String path = "tomcat/webapps/ROOT/images/profile/";
 
-
+	
 
 	@RequestMapping("/main.do")
 	public String getAllList(@RequestParam(value="condition",defaultValue="title",required=false)String condition,@RequestParam(value="keyword",defaultValue="",required=false)String keyword,UserInfoVO vo,Model model,HttpServletRequest request,HttpServletResponse response) {
@@ -257,7 +260,7 @@ public class UserInfoController {
 		UserInfoVO uVo = (UserInfoVO)session.getAttribute("uVO");
 		vo.setId(uVo.getId());
 		MultipartFile fileupload = vo.getFileUpload();
-		//System.out.println("프로필컨트롤러 파일업로드이름 : "+fileupload);
+		
 
 		String fileName = fileupload.getOriginalFilename();
 		String filename2 = vo.getId()+fileName.substring(fileName.length()-4,fileName.length()); //확장자
@@ -265,8 +268,13 @@ public class UserInfoController {
 		//System.out.println("파일이름 : "+fileName);
 
 		try {
+
 			fileupload.transferTo(new File(path+filename2));
-			vo.setPath("images\\profile\\"+filename2);
+//		local용			
+//			vo.setPath("images\\profile\\"+filename2);
+			
+//		호스팅용
+			vo.setPath("images/profile/"+filename2);
 
 		} catch (IllegalStateException e) {		
 			e.printStackTrace();
